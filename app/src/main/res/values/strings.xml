@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RecyclerViewForListAndGridSample</string>
+    <string name="is_coffee">Coffee</string>
+    <string name="is_beer">Beer</string>
+    <string name="is_grid">Grid</string>
+    <string name="is_list">List</string>
+    <string name="coffee_label">Lorem ipsum dipshum cumpsum...</string>
+</resources>

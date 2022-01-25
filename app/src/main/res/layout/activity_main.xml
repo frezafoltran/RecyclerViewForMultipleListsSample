@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.foltran.recyclerviewforlistandgridsample.presentation.MainViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.MainActivity">
+
+        <RadioGroup
+            android:checkedButton="@{viewModel.isCoffeeItem ? @id/isCoffee : @id/isBeer}"
+            android:id="@+id/switchIsCoffee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:layout_marginVertical="@dimen/margin_medium"
+            android:background="@drawable/toggle_outline"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/switchIsGrid">
+
+            <RadioButton
+                android:id="@+id/isCoffee"
+                android:background="@drawable/toggle_background"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:textSize="@dimen/switch_text_size"
+                android:text="@string/is_coffee"
+                android:textColor="@color/white"
+                android:onClick="@{() -> viewModel.toggleItems()}"/>
+
+            <RadioButton
+                android:id="@+id/isBeer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_background"
+                android:button="@null"
+                android:gravity="center"
+                android:textSize="@dimen/switch_text_size"
+                android:text="@string/is_beer"
+                android:textColor="@color/white"
+                android:onClick="@{() -> viewModel.toggleItems()}"/>
+        </RadioGroup>
+
+        <RadioGroup
+            android:checkedButton="@{viewModel.curDisplayConfig.grid ? @id/isGrid : @id/isList}"
+            android:id="@+id/switchIsGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:background="@drawable/toggle_outline"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/switchIsCoffee"
+            app:layout_constraintBottom_toTopOf="@id/rv">
+
+            <RadioButton
+                android:id="@+id/isGrid"
+                android:background="@drawable/toggle_background"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:textSize="@dimen/switch_text_size"
+                android:text="@string/is_grid"
+                android:textColor="@color/white"
+                android:onClick="@{() -> viewModel.toggleConfig()}"/>
+
+            <RadioButton
+                android:id="@+id/isList"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_background"
+                android:button="@null"
+                android:gravity="center"
+                android:textSize="@dimen/switch_text_size"
+                android:text="@string/is_list"
+                android:textColor="@color/white"
+                android:onClick="@{() -> viewModel.toggleConfig()}"/>
+        </RadioGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            items="@{viewModel.items}"
+            itemClick="@{viewModel}"
+            curDisplayConfig="@{viewModel.curDisplayConfig}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/switchIsGrid"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
